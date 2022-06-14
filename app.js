@@ -19,9 +19,10 @@ app.get("/", function (req, res) {
   var day = today.getDay();
   var dayName = days[day];
 
-  if (day === 6 || day === 0) {
-  } else {
-  }
+  // if (day === 6 || day === 0) {
+  // } else {
+  // }
+  res.render("list", { nameOfDay: dayName });
 });
 
 app.listen(process.env.PORT || 3000, function () {
