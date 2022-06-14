@@ -9,16 +9,26 @@
 </head>
 
 <body>
+    <h1>
+        <%=dayName %>
+    </h1>
 
-    <% if(nameOfDay==="Saturday" ||nameOfDay==="Sunday" ){ %>
-        <h1 style="color: blueviolet;">
-            <%= nameOfDay %>'s ToDo List
-        </h1>
-        <% }else{ %>
-            <h1 style="color: blue;">
-                <%= nameOfDay %>'s ToDo List
-            </h1>
-            <% } %>
+    <ul>
+        <li>Complete lecture</li>
+        <li>Goto Jim</li>
+        <li>Light weight baby</li>
+        <%for(var i=0; i<(newTask.length);i++){%>
+            <li>
+                <%= newTask[i]%>
+            </li>
+            <%}%>
+                <li>
+                    <form action="/" method="post">
+                        <input type="text" name="task" id=" "><br>
+                        <button type="submit">+</button>
+                    </form>
+                </li>
+    </ul>
 
 
 
