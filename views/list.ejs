@@ -9,8 +9,17 @@
 </head>
 
 <body>
-    <h1>It's <%= nameOfDay %>
-    </h1>
+
+    <% if(nameOfDay==="Saturday" ||nameOfDay==="Sunday" ){ %>
+        <h1 style="color: blueviolet;">
+            <%= nameOfDay %>'s ToDo List
+        </h1>
+        <% }else{ %>
+            <h1 style="color: blue;">
+                <%= nameOfDay %>'s ToDo List
+            </h1>
+            <% } %>
+
 
 
 </body>
