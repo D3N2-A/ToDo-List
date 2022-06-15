@@ -2,4 +2,5 @@ html {
   background-color: #d3ebcd;
   font-family: "San Francisco";
   background-image: -webkit-linear-gradient(45deg, #aedbce, #d3ebcd);
+  text-align: center;
 }
