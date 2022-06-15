@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-let items = [];
+let items = ["Complete lecture", "Goto Jim", "Light weight baby"];
 const app = express();
 app.set("view engine", "ejs");
 

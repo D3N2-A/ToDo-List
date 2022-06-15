@@ -1,6 +1,61 @@
 html {
   background-color: #d3ebcd;
   font-family: "San Francisco";
-  background-image: -webkit-linear-gradient(45deg, #aedbce, #d3ebcd);
+  background-image: -webkit-linear-gradient(12deg, #aedbce 50%, #d3ebcd 50%);
+  min-width: 1000px;
+}
+
+h1 {
+  color: white;
+  padding: 10px;
+}
+
+.box {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+#heading {
+  background-color: #aedbce;
   text-align: center;
+}
+
+p {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #00204a;
+}
+.item {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+input:checked + p {
+  text-decoration: line-through;
+  color: #aedbce;
+}
+
+form {
+  text-align: center;
+  padding: 10px;
+}
+
+input[type="checkbox"] {
+  margin: 20px;
+}
+
+form {
+  text-align: center;
+  margin-left: 20px;
 }

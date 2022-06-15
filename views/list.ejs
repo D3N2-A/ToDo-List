@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo-e-nator</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net/gh/mailtoharshit/San-Francisco-Font-/sanfrancisco.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mailtoharshit/San-Francisco-Font-/sanfrancisco.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -17,22 +18,25 @@
         </h1>
     </div>
 
-    <ul>
-        <li>Complete lecture</li>
-        <li>Goto Jim</li>
-        <li>Light weight baby</li>
-        <%for(var i=0; i<(newTask.length);i++){%>
-            <li>
-                <%= newTask[i]%>
-            </li>
-            <%}%>
-                <li>
-                    <form action="/" method="post">
-                        <input type="text" name="task" id=" "><br>
-                        <button type="submit">+</button>
-                    </form>
-                </li>
-    </ul>
+
+
+
+    <div class="box">
+        <% for(var i=0; i<(newTask.length);i++){ %>
+            <div class="item">
+                <input type="checkbox">
+                <p>
+                    <%= newTask[i] %>
+                </p>
+            </div>
+            <% } %>
+
+                <form action="/" method="post" class="item">
+                    <input type="text" name="task" id=" " placeholder="New Task" autocomplete="off">
+                    <button type="submit">+</button>
+                </form>
+
+    </div>
 
 
 
