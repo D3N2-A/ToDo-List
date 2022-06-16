@@ -18,6 +18,10 @@ app.get("/", function (req, res) {
   res.render("list", { dayName: dayInfo, newTask: items });
 });
 
+app.get("/sample", function (req, res) {
+  res.render("sample");
+});
+
 app.post("/", function (req, res) {
   let item = req.body.task;
   items.push(item);
