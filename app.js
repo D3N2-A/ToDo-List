@@ -18,7 +18,12 @@ app.use(express.static("public"));
 const itemSchema = new mongoose.Schema({
   content: String,
 });
+const listSchema = new mongoose.Schema({
+  name: String,
+  items: [itemSchema],
+});
 
+const List = mongoose.model("List", listSchema);
 const Item = mongoose.model("Item", itemSchema);
 
 const I1 = new Item({ content: "<-This is your ToDo List->" });
@@ -55,22 +60,67 @@ app.get("/sample", function (req, res) {
 });
 
 app.post("/", function (req, res) {
+  const listName = req.body.list;
   let newItem = req.body.task;
   const newTask = new Item({
     content: newItem,
   });
-  newTask.save();
-  dItems.push(newTask);
-  res.redirect("/");
+  if (listName === getDate()) {
+    newTask.save();
+    dItems.push(newTask);
+    res.redirect("/");
+  } else {
+    List.findOne({ name: listName }, (err, foundList) => {
+      foundList.items.push(newTask);
+      foundList.save();
+      res.redirect("/" + listName);
+    });
+  }
 });
+// <------------------------------------------------------->
 
-app.post("/delete", (req, res) => {
-  Item.findByIdAndRemove(req.body.checkbox, function (err) {
-    if (!err) {
-      console.log("task removed successfully");
+app.get("/:listName", (req, res) => {
+  const listName = req.params.listName;
+
+  List.findOne({ name: listName }, (err, foundList) => {
+    if (!foundList) {
+      const list = new List({
+        name: listName,
+        items: dItems,
+      });
+      list.save();
+      res.redirect("/" + listName);
+    } else {
+      res.render("routed", {
+        dayName: foundList.name,
+        newTask: foundList.items,
+      });
     }
   });
-  res.redirect("/");
+});
+
+// <------------------------------------------------------->
+
+app.post("/delete", (req, res) => {
+  const listName = req.body.del;
+  if (req.body.del === getDate()) {
+    Item.findByIdAndRemove(req.body.checkbox, function (err) {
+      if (!err) {
+        console.log("task removed successfully");
+      }
+    });
+    res.redirect("/");
+  } else {
+    List.findByIdAndUpdate(
+      { name: listName },
+      { $pull: { items: { _id: req.body.checkbox } } },
+      (err, foundList) => {
+        if (!err) {
+          res.redirect("/" + listName);
+        }
+      }
+    );
+  }
 });
 
 app.listen(process.env.PORT || 3000, function () {
