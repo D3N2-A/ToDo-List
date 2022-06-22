@@ -117,6 +117,8 @@ app.post("/delete", (req, res) => {
       (err, foundList) => {
         if (!err) {
           res.redirect("/" + listName);
+        } else {
+          console.log(err);
         }
       }
     );
