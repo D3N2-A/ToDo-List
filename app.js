@@ -10,10 +10,32 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// <--------------------------------------------->
+
 const itemSchema = new mongoose.schema({
   content: String,
 });
-const item = mongoose.model("item", itemSchema);
+
+const Item = mongoose.model("Item", itemSchema);
+
+const I1 = new Item({ content: "<-This is your ToDo List->" });
+
+const I2 = new Item({ content: "Hit + button to add an Item" });
+
+const I3 = new Item({ content: "<- Click this button to delete an Item" });
+
+const dItems = [I1, I2, I3]; //default Items array
+
+Item.insertMany(dItems, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Successfully added and Item");
+  }
+});
+
+// <------------------------------------------->
+
 app.get("/", function (req, res) {
   let dayInfo = getDate();
   res.render("list", { dayName: dayInfo, newTask: items });
