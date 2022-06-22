@@ -64,6 +64,15 @@ app.post("/", function (req, res) {
   res.redirect("/");
 });
 
+app.post("/delete", (req, res) => {
+  Item.findByIdAndRemove(req.body.checkbox, function (err) {
+    if (!err) {
+      console.log("task removed successfully");
+    }
+  });
+  res.redirect("/");
+});
+
 app.listen(process.env.PORT || 3000, function () {
   console.log("server started at port 3000");
 });
