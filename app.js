@@ -5,14 +5,17 @@ const date = require(__dirname + "/date.js");
 // let items = ["Complete lecture", "Goto Jim", "Light weight baby"];
 const mongoose = require("mongoose");
 const app = express();
-mongoose.connect("mongodb://localhost.com:27017/td");
+mongoose.connect("mongodb://localhost:27017/todo", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // <--------------------------------------------->
 
-const itemSchema = new mongoose.schema({
+const itemSchema = new mongoose.Schema({
   content: String,
 });
 
@@ -38,7 +41,10 @@ Item.insertMany(dItems, (err) => {
 
 app.get("/", function (req, res) {
   let dayInfo = getDate();
-  res.render("list", { dayName: dayInfo, newTask: items });
+
+  Item.find({}, (err, result) => {
+    res.render("list", { dayName: dayInfo, newTask: result });
+  });
 });
 
 app.get("/sample", function (req, res) {

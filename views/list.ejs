@@ -9,14 +9,14 @@
 
 
     <div class="box">
-        <% for(var i=0; i<(newTask.length);i++){ %>
+        <% newTask.forEach(element=> { %>
             <div class="item">
                 <input type="checkbox">
                 <p>
-                    <%= newTask[i] %>
+                    <%= element.content %>
                 </p>
             </div>
-            <% } %>
+            <% }) %>
 
                 <form action="/" method="post" class="item">
                     <input type="text" name="task" id=" " placeholder="New Task" autocomplete="off">
