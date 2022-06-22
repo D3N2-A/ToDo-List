@@ -29,21 +29,24 @@ const I3 = new Item({ content: "<- Click this button to delete an Item" });
 
 const dItems = [I1, I2, I3]; //default Items array
 
-Item.insertMany(dItems, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Successfully added and Item");
-  }
-});
-
 // <------------------------------------------->
 
 app.get("/", function (req, res) {
   let dayInfo = getDate();
 
   Item.find({}, (err, result) => {
-    res.render("list", { dayName: dayInfo, newTask: result });
+    if (result.length === 0) {
+      Item.insertMany(dItems, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully added and Item");
+        }
+      });
+      res.redirect("/");
+    } else {
+      res.render("list", { dayName: dayInfo, newTask: result });
+    }
   });
 });
 
@@ -52,8 +55,12 @@ app.get("/sample", function (req, res) {
 });
 
 app.post("/", function (req, res) {
-  let item = req.body.task;
-  items.push(item);
+  let newItem = req.body.task;
+  const newTask = new Item({
+    content: newItem,
+  });
+  newTask.save();
+  dItems.push(newTask);
   res.redirect("/");
 });
 
