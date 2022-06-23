@@ -3,8 +3,9 @@
     "body-parser": "^1.20.0",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "lodash": "^4.17.21",
     "mongoose": "^6.4.0",
-    "nodemon": "^2.0.16"
+    "nodemon": "^1.3.3"
   },
   "name": "todo-list",
   "description": "",
@@ -19,6 +20,9 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "16.15.0"
+  },
   "bugs": {
     "url": "https://github.com/D3N2-A/ToDo-List/issues"
   },

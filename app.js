@@ -4,11 +4,15 @@ const getDate = require("./date.js");
 const date = require(__dirname + "/date.js");
 // let items = ["Complete lecture", "Goto Jim", "Light weight baby"];
 const mongoose = require("mongoose");
+const _ = require("lodash");
 const app = express();
-mongoose.connect("mongodb://localhost:27017/todo", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://admin-1:test123@ninja.z7s00i9.mongodb.net/todo",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -81,7 +85,7 @@ app.post("/", function (req, res) {
 // <------------------------------------------------------->
 
 app.get("/:listName", (req, res) => {
-  const listName = req.params.listName;
+  const listName = _.capitalize(req.params.listName);
 
   List.findOne({ name: listName }, (err, foundList) => {
     if (!err) {
